@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "290246398032",
+    "project_id": "gymcarnation",
+    "storage_bucket": "gymcarnation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290246398032:android:88f781c40ef481c86ec155",
+        "android_client_info": {
+          "package_name": "com.example.gymcarnation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "290246398032-ku4eq9i16e36gn855cplf31gvol7nlt3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARVoKOALcKS7G-j1rodQKn0CWdmD887WE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "290246398032-ku4eq9i16e36gn855cplf31gvol7nlt3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
