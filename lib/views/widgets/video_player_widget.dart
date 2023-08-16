@@ -15,6 +15,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     _controller = VideoPlayerController.asset(widget.videoPath)
       ..initialize().then((_) {
         _controller.setLooping(true);
@@ -22,7 +23,15 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {});
       });
-    ;
+  }
+
+  bool isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if (isInit) {}
+    isInit = false;
+    super.didChangeDependencies();
   }
 
   @override
@@ -33,19 +42,19 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _controller.value.isInitialized
-            ? SizedBox(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: VideoPlayer(_controller),
-                ),
-              )
-            : Container(),
-      ),
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    return Center(
+      child: _controller.value.isInitialized
+          ? SizedBox(
+              height: height,
+              width: width,
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              ),
+            )
+          : Container(),
     );
   }
 }
