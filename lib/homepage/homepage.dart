@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gymcarnation/homepage/page1.dart';
 import 'package:gymcarnation/homepage/page2.dart';
 import 'package:gymcarnation/homepage/page3.dart';
-import 'package:gymcarnation/views/splash_screen/splash_screen.dart';
-
-import '../views/widgets/video_player_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
