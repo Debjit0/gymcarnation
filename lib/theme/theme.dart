@@ -7,6 +7,10 @@ ThemeData getAppTheme(BuildContext context, bool isDarkTheme) {
     useMaterial3: true,
     scaffoldBackgroundColor: const Color(0xff1C1C1E),
     primaryColor: const Color(0xffB51C80),
+    appBarTheme: AppBarTheme(
+      color: Colors.transparent,
+      elevation: 0,
+    ),
     textTheme: const TextTheme(
         titleLarge: TextStyle(
           fontSize: 36,
@@ -25,6 +29,12 @@ ThemeData getAppTheme(BuildContext context, bool isDarkTheme) {
           fontFamily: 'Montserrat',
           color: Colors.white,
           fontWeight: FontWeight.w400,
+        ),
+        labelMedium: TextStyle(
+          fontSize: 16,
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
         ),
         bodyMedium: TextStyle(
           fontSize: 16,
