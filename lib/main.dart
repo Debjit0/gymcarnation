@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Gymcarnation',
       theme: getAppTheme(context, false),
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }

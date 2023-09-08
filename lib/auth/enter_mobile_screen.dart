@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:gymcarnation/checkUserStatus/checkUserStatus.dart';
+import 'package:gymcarnation/homepage/homepage.dart';
+import 'package:gymcarnation/utils/routers.dart';
 import 'package:gymcarnation/views/widgets/video_player_widget.dart';
 import 'package:pinput/pinput.dart';
 
@@ -11,7 +15,12 @@ class EnterMobileScreen extends StatefulWidget {
 }
 
 class _EnterMobileScreenState extends State<EnterMobileScreen> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  String phoneNo="";
   bool isOTP = false;
+  var code = "";
+  String verId = "";
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   FocusNode _focus = FocusNode();
 
   String countryCode = '+91';
@@ -70,6 +79,8 @@ class _EnterMobileScreenState extends State<EnterMobileScreen> {
                       TextFormField(
                         focusNode: _focus,
                         onChanged: (value) {
+                          phoneNo = value;
+                          print(phoneNo);
                           isOTP = false;
                           setState(() {});
                         },
@@ -131,7 +142,7 @@ class _EnterMobileScreenState extends State<EnterMobileScreen> {
 
                       //otp
                       isOTP
-                          ? const Column(
+                          ?  Column(
                               children: [
                                 SizedBox(
                                   height: 16,
@@ -140,6 +151,9 @@ class _EnterMobileScreenState extends State<EnterMobileScreen> {
                                   height: 48,
                                   child: Pinput(
                                     length: 6,
+                                    onChanged: (value) {
+                                      code = value;
+                                    },
                                   ),
                                 ),
                               ],
@@ -151,10 +165,71 @@ class _EnterMobileScreenState extends State<EnterMobileScreen> {
 
                       //button
                       InkWell(
-                        onTap: () {
-                          if (!isOTP) {
+                        onTap: () async{
+                          if (isOTP==false) {
+                            if (phoneNo!="") {
+                                print("Executed");
+                                print("${countryCode + phoneNo}");
+                                try {
+                                  await FirebaseAuth.instance.verifyPhoneNumber(
+                                    phoneNumber:
+                                        "${countryCode + phoneNo}",
+                                    verificationCompleted:
+                                        (PhoneAuthCredential credential) {},
+                                    verificationFailed:
+                                        (FirebaseAuthException e) {},
+                                    codeSent: (String verificationId,
+                                        int? resendToken) {
+                                      verId = verificationId;
+                                      
+                                      
+                                    },
+                                    codeAutoRetrievalTimeout:
+                                        (String verificationId) {},
+                                  );
+                                } catch (e) {
+                                  print(e);
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Center(
+                                        child: Text(e.toString()),
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }
                             isOTP = true;
                             setState(() {});
+                            
+                          }
+                          else if(isOTP==true){
+                            print("Executed2");
+                            if(code!=""){
+                              try {
+                              PhoneAuthCredential credential =
+                                  PhoneAuthProvider.credential(
+                                      verificationId: verId,
+                                      smsCode: code);
+                              // Sign the user in (or link) with the credential
+                              await auth.signInWithCredential(credential);
+                              nextPageOnly(
+                                  context: context, page: CheckUserStatus(phone: "${countryCode + phoneNo}",));
+                            } catch (e) {
+                              print('verify error');
+                              print(e);
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Center(
+                                    child: Text(e.toString()),
+                                 ),
+                                ),
+                              );
+                            }
+                            }
                           }
                         },
                         child: Container(

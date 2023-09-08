@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gymcarnation/auth/enter_mobile_screen.dart';
+import 'package:gymcarnation/checkUserStatus/checkUserStatus.dart';
+import 'package:gymcarnation/utils/routers.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,11 +19,15 @@ class _SplashScreenState extends State<SplashScreen> {
   startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (t.tick == 3) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (ctx) => const EnterMobileScreen(),
-          ),
-        );
+        
+        if(FirebaseAuth.instance.currentUser == null){
+          nextPageOnly(context: context, page: EnterMobileScreen());
+        }
+        else{
+          nextPageOnly(context: context, page: CheckUserStatus());
+        }
+        //nextPageOnly(context: context, page: EnterMobileScreen());
+        
       }
     });
   }
