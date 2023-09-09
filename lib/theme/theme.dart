@@ -6,7 +6,7 @@ ThemeData getAppTheme(BuildContext context, bool isDarkTheme) {
   return ThemeData(
     useMaterial3: true,
     scaffoldBackgroundColor: const Color(0xff1C1C1E),
-    primaryColor: const Color(0xffB51C80),
+    primaryColor: Color.fromRGBO(181, 28, 128, 1),
     appBarTheme: AppBarTheme(
       color: Colors.transparent,
       elevation: 0,

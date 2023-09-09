@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -33,26 +32,36 @@ class _CheckVerificationState extends State<CheckVerification> {
   Widget build(BuildContext context) {
     return conditions == false
         ? Scaffold(
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Wait until u get verified",
-                  style: TextStyle(color: Colors.white),
-                ),
-                ElevatedButton(
+            appBar: AppBar(
+              actions: [
+                IconButton(
                     onPressed: () {
                       FirebaseAuth.instance.signOut();
                       nextPageOnly(context: context, page: EnterMobileScreen());
                     },
-                    child: Text("Logout")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {});
-                      nextPageOnly(context: context, page: HomePage());
-                    },
-                    child: Text("Refresh"))
+                    icon: Icon(
+                      Icons.exit_to_app_rounded,
+                      color: Colors.white,
+                    ))
               ],
+            ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Wait until you get verified by our admins.",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        //nextPageOnly(context: context, page: HomePage());
+                        getVerificationStatus();
+                        setState(() {});
+                      },
+                      child: Text("Refresh"))
+                ],
+              ),
             ),
           )
         : HomePage();
@@ -63,6 +72,7 @@ class _CheckVerificationState extends State<CheckVerification> {
         .collection('Users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
+    print(document['isverified']);
     isVerified = document['isverified'];
     if (isVerified == true) {
       conditions = true;

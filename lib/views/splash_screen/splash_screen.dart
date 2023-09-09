@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (t.tick == 3) {
+      if (t.tick == 2) {
         
         if(FirebaseAuth.instance.currentUser == null){
           nextPageOnly(context: context, page: EnterMobileScreen());

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gymcarnation/Membership%20Plans/membershipPlans.dart';
+import 'package:gymcarnation/utils/routers.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({super.key});
@@ -22,9 +24,9 @@ class _Page1State extends State<Page1> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         child: Container(
           padding: const EdgeInsets.all(16),
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -42,7 +44,7 @@ class _Page1State extends State<Page1> {
                 ],
               ),
               SizedBox(
-                height: 16,
+                height: 24,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -60,20 +62,43 @@ class _Page1State extends State<Page1> {
                 ],
               ),
               SizedBox(
-                height: 16,
+                height: 24,
+              ),
+              InkWell(
+                onTap: () {
+                  nextPage(context: context, page: MembershipPlans());
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.card_membership_outlined,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      'Membership plans',
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 24,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Icon(
-                    Icons.card_membership_outlined,
+                    Icons.exit_to_app_rounded,
                     color: Colors.white,
                   ),
                   SizedBox(
                     width: 16,
                   ),
                   Text(
-                    'Membership plans',
+                    'Logout',
                   ),
                 ],
               ),

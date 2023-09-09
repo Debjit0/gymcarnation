@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gymcarnation/SignUp/signup.dart';
+import 'package:gymcarnation/checkVerifivation/checkVerification.dart';
 import 'package:gymcarnation/homepage/homepage.dart';
 import 'package:gymcarnation/utils/routers.dart';
 
@@ -40,7 +41,7 @@ Future<void> checkStatus() async {
 
   if (querySnapshot.docs.isNotEmpty) {
     // Value exists in the Firestore collection
-    nextPageOnly(context: context, page: HomePage());
+    nextPageOnly(context: context, page: CheckVerification());
     print('Value exists.');
   } else {
     // Value does not exist in the Firestore collection
