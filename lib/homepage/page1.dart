@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gymcarnation/Membership%20Plans/membershipPlans.dart';
 import 'package:gymcarnation/utils/routers.dart';
@@ -10,6 +12,15 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> {
+  String subscriptionMessage = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    checkMembership().then((value) => setState(() {}));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +141,7 @@ class _Page1State extends State<Page1> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Your Membership Will Expire In"),
+            Text(subscriptionMessage),
             const SizedBox(height: 16),
             Text(
               '4 Days',
@@ -144,5 +155,23 @@ class _Page1State extends State<Page1> {
         ),
       ),
     );
+  }
+
+  checkMembership() async {
+    DocumentSnapshot document = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    if (document['subscription'] == "NA") {
+      subscriptionMessage = "You are not subscribed to any plan";
+    } else if (document['subscription'] == "1M3K") {
+      subscriptionMessage = "You are subscribed to the 1 Month Plan";
+    } else if (document['subscription'] == "3M8K") {
+      subscriptionMessage = "You are subscribed to the 3 Months Plan";
+    } else if (document['subscription'] == "6M13K") {
+      subscriptionMessage = "You are subscribed to the 6 Months Plan";
+    } else if (document['subscription'] == "1Y18K") {
+      subscriptionMessage = "You are subscribed to the 3 Months Plan";
+    }
   }
 }
