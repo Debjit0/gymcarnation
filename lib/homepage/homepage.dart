@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       theme: getAppTheme(context, false),
       home: Scaffold(
         backgroundColor: const Color(0xff1C1C1E),
-        body: const [
+        body: [
           Page1(),
           Page2(),
           Page3(),

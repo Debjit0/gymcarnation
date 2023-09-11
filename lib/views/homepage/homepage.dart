@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gymcarnation/views/splash_screen/splash_screen.dart';
 
 import '../widgets/video_player_widget.dart';
 

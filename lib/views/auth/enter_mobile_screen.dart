@@ -17,7 +17,7 @@ class _EnterMobileScreenState extends State<EnterMobileScreen> {
   String countryCode = '+91';
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    //final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final _countryPicker = FlCountryCodePicker(
       countryTextStyle: Theme.of(context).textTheme.bodyMedium,

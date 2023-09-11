@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gymcarnation/theme/theme.dart';
 import 'package:gymcarnation/views/splash_screen/splash_screen.dart';
 
-import 'homepage/homepage.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

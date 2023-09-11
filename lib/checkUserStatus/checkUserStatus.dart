@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gymcarnation/SignUp/signup.dart';
 import 'package:gymcarnation/checkVerifivation/checkVerification.dart';
-import 'package:gymcarnation/homepage/homepage.dart';
 import 'package:gymcarnation/utils/routers.dart';
 
+// ignore: must_be_immutable
 class CheckUserStatus extends StatefulWidget {
   CheckUserStatus({super.key, this.phone});
   String? phone;
